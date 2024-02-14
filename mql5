@@ -1,0 +1,65 @@
+
+// Volume Mag - Forex Trading Robot
+// Developer's Site: forexroboteasy.com
+// Developed by: Forex Robot Easy Team
+
+// Include required libraries
+#include <Trade\Trade.mqh>
+
+// Define necessary variables
+int signalCount = 0; // Number of signals generated
+bool signalGenerated = false; // Flag to track signal generation
+
+// Initialize Trade object
+CTrade trade;
+
+// Custom function to generate trading signals
+void GenerateSignals()
+{
+    // Implement your code to generate trading signals here
+    // Ensure signals are generated selectively to eliminate information overload
+    
+    // Example: Generate a buy signal if conditions are met
+    if (condition1 && condition2 && !signalGenerated)
+    {
+        trade.Buy(); // Place a buy trade
+        signalGenerated = true; // Set signal generated flag
+        signalCount++; // Increment signal count
+    }
+    
+    // Example: Generate a sell signal if conditions are met
+    if (condition3 && condition4 && !signalGenerated)
+    {
+        trade.Sell(); // Place a sell trade
+        signalGenerated = true; // Set signal generated flag
+        signalCount++; // Increment signal count
+    }
+}
+
+// Custom function to evaluate signals after the close of the current candle
+void EvaluateSignals()
+{
+    // Implement your code to evaluate signals here
+    // Ensure signals are not redrawn or lag
+    
+    // Example: Check if any signals were generated
+    if (signalCount > 0)
+    {
+        // Print number of signals generated
+        Print('Total Signals Generated: ', signalCount);
+        
+        // Reset signal count and flag
+        signalCount = 0;
+        signalGenerated = false;
+    }
+}
+
+// Entry point of the program
+void OnStart()
+{
+    // Generate trading signals
+    GenerateSignals();
+    
+    // Evaluate signals after the close of the current candle
+    EvaluateSignals();
+}
